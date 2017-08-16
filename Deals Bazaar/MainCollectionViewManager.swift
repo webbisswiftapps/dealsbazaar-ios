@@ -1,0 +1,173 @@
+//
+//  MainCollectionViewManager.swift
+//  Deals Bazaar
+//
+//  Created by Biswas Lamichhane on 09/07/2017.
+//  Copyright © 2017 Webbisswift. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class MainCollectionViewManager: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+
+    weak var collectionView: UICollectionView?
+    var viewModel:PMainViewModel?
+    
+    init(withCollectionView:UICollectionView, andViewModel: PMainViewModel){
+        self.collectionView = withCollectionView
+        self.collectionView?.register(SliderCell.self, forCellWithReuseIdentifier: SliderRow.reuseId)
+        self.collectionView?.register(LoaderCell.self, forCellWithReuseIdentifier: LoaderRow.reuseId)
+        self.collectionView?.register(AdBannerCell.self, forCellWithReuseIdentifier: AdBannerRow.reuseId)
+        self.collectionView?.register(AdBannerCellLarge.self, forCellWithReuseIdentifier: AdNativeLargeRow.reuseId)
+        self.collectionView?.register(ProductSectionCell.self, forCellWithReuseIdentifier: ProductSectionRow.reuseId)
+        self.collectionView?.register(UINib(nibName: "CategoryRowCell", bundle: nil), forCellWithReuseIdentifier: CategoryRow.reuseId)
+        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.viewModel = andViewModel
+    }
+    
+    var scrollCallbackShow:(()->Void)? /* Handles when scrolling to top    */
+    var scrollCallbackHide:(()->Void)? /* Handles when scrolling to bottom */
+
+    
+    
+    var data:[IRow] = [CategoryRow()]
+    
+    
+    func addRow(row:IRow){
+        
+        self.data.append(row)
+        self.data.sort { (object1, object2) -> Bool in
+                return object1.priority > object2.priority
+        }
+        self.collectionView?.reloadData()
+    }
+    
+    func fillNativeAds(withRootVC:DBViewController){
+       let unitId = "ca-app-pub-7598085745586998/3763099700"
+       
+        //find number of items in the list
+        let count = data.count - 3
+        
+        if(count > 0){
+       
+            var ads = (count * 40) / 100
+            if ads == 0 {
+                ads = 1 //at least 1
+            }
+        
+            var idx = 4
+            if count > 1{
+                idx = 5
+            }
+            
+        for _ in 1...ads{
+            let adRow = AdNativeLargeRow()
+            adRow.rootVC = withRootVC
+            adRow.unitId = unitId
+            
+            data.insert(adRow, at: idx)
+            
+            idx = idx + 3
+            
+        }
+        
+        
+            self.collectionView?.reloadData()
+        }else{
+            print("Not enough items in the list")
+        }
+        
+    }
+    
+    func showLoadingRow(){
+        addRow(row: LoaderRow())
+    }
+    
+    func hideLoadingRow(){
+        self.data.removeLast()
+        self.collectionView?.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let item:IRow = data[indexPath.row]
+        
+        switch item.type{
+        
+            case .Slider:
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? SliderCell{
+                    cell.item = item
+                    cell.tapHandler = {slide in
+                        self.viewModel?.onOfferTapped(slide: slide)
+                    }
+                    return cell
+                }
+            
+            case .ProductSection:
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? ProductSectionCell{
+                    cell.item = item as? ProductSectionRow
+                    cell.viewAllTapHandler = {section in
+                        self.viewModel?.onViewAllTapped(section:section)
+                    }
+                    
+                    cell.productTapHandler = {product in
+                        self.viewModel?.onProductTapped(product: product)
+                    }
+                    return cell
+                }
+            
+            case .Loader:
+                return (collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? LoaderCell)!
+        case .Categories:
+            if let cell =  (collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? CategoryRowCell){
+                cell.tapHandler = {index in
+                    self.viewModel?.onSectionTapped(index: index)
+                }
+                return cell
+            }
+       
+        case .AdBanner:
+            if let cell =  (collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? AdBannerCell){
+                cell.item = item as? AdBannerRow
+                return cell
+            }
+        case .AdLarge:
+            if let cell =  (collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseId, for: indexPath) as? AdBannerCellLarge){
+                cell.item = item as? AdNativeLargeRow
+                return cell
+            }
+        default:
+                return UICollectionViewCell()
+        }
+        return UICollectionViewCell()
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let item:IRow = data[indexPath.row]
+        return CGSize(width: collectionView.frame.width,height: CGFloat(item.height))
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if(velocity.y>0) {
+            //hide : scrolling down
+            if let downHandler = self.scrollCallbackHide{
+                downHandler()
+            }
+            
+        } else {
+            //unhide : scrolling up
+            if let upHandler = self.scrollCallbackShow{
+                upHandler()
+            }
+        }
+    }
+    
+
+    
+}

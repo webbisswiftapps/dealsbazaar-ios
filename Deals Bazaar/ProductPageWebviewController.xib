@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="QM.ttf">
+            <string>Quicksand-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductPageWebviewController" customModule="Deals_Bazaar" customModuleProvider="target">
+            <connections>
+                <outlet property="productTitleBar" destination="4i2-85-fMm" id="jr0-XH-maH"/>
+                <outlet property="progressBar" destination="5oO-e7-YLe" id="uwH-Lf-mfh"/>
+                <outlet property="view" destination="iN0-l3-epB" id="fgm-SS-ezi"/>
+                <outlet property="webView" destination="zgo-Vl-kSK" id="x6S-3d-0AW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soJ-9j-V0B">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="npr-au-gaj">
+                            <rect key="frame" x="0.0" y="20" width="375" height="39"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg8-DP-7w0">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="39"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="o9R-GK-FmS"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_back"/>
+                                    <connections>
+                                        <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="uVY-CN-45v"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://product.url" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4i2-85-fMm">
+                                    <rect key="frame" x="50" y="0.0" width="275" height="39"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Quicksand-Medium" family="Quicksand" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYo-4H-aO0">
+                                    <rect key="frame" x="325" y="0.0" width="50" height="39"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="jo5-Rh-hhQ"/>
+                                    </constraints>
+                                    <state key="normal" image="search_white"/>
+                                    <connections>
+                                        <action selector="onClickProductShare:" destination="-1" eventType="touchUpInside" id="dmN-X0-dzB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.20727380870000001" blue="0.14245286779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="npr-au-gaj" secondAttribute="trailing" id="0id-Fb-uKL"/>
+                        <constraint firstAttribute="bottom" secondItem="npr-au-gaj" secondAttribute="bottom" constant="5" id="7tZ-lh-MfJ"/>
+                        <constraint firstAttribute="height" constant="64" id="Bue-la-QYn"/>
+                        <constraint firstItem="npr-au-gaj" firstAttribute="leading" secondItem="soJ-9j-V0B" secondAttribute="leading" id="UVa-oX-sIw"/>
+                        <constraint firstItem="npr-au-gaj" firstAttribute="top" secondItem="soJ-9j-V0B" secondAttribute="top" constant="20" id="YYr-nZ-xc3"/>
+                    </constraints>
+                </view>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5oO-e7-YLe">
+                    <rect key="frame" x="0.0" y="61.5" width="375" height="2.5"/>
+                </progressView>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgo-Vl-kSK">
+                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5oO-e7-YLe" firstAttribute="top" secondItem="soJ-9j-V0B" secondAttribute="bottom" constant="-2" id="7tw-6F-iov"/>
+                <constraint firstAttribute="bottom" secondItem="zgo-Vl-kSK" secondAttribute="bottom" id="AbQ-sb-bJs"/>
+                <constraint firstItem="soJ-9j-V0B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HB1-qj-QTE"/>
+                <constraint firstItem="soJ-9j-V0B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RwO-YD-s2o"/>
+                <constraint firstItem="zgo-Vl-kSK" firstAttribute="top" secondItem="5oO-e7-YLe" secondAttribute="bottom" constant="2" id="Ujs-6U-f9d"/>
+                <constraint firstAttribute="trailing" secondItem="soJ-9j-V0B" secondAttribute="trailing" id="bba-61-iSS"/>
+                <constraint firstAttribute="trailing" secondItem="zgo-Vl-kSK" secondAttribute="trailing" id="beM-DP-IPH"/>
+                <constraint firstItem="zgo-Vl-kSK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dRo-uR-3WT"/>
+                <constraint firstItem="5oO-e7-YLe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sH9-aM-CMT"/>
+                <constraint firstAttribute="trailing" secondItem="5oO-e7-YLe" secondAttribute="trailing" id="vP1-fR-zmO"/>
+            </constraints>
+            <point key="canvasLocation" x="98.5" y="61.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_back" width="24" height="24"/>
+        <image name="search_white" width="25" height="25"/>
+    </resources>
+</document>

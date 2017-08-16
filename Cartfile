@@ -1,0 +1,9 @@
+github "hkellaway/Gloss"
+github "Alamofire/Alamofire" ~> 4.4
+github "realm/realm-cocoa"
+github "ninjaprox/NVActivityIndicatorView"
+github "ReactiveX/RxSwift" ~> 3.0
+github "RxSwiftCommunity/RxAlamofire" "master"
+github "eggswift/ESTabBarController"
+github "zvonicek/ImageSlideshow"
+github "onevcat/Kingfisher" ~> 3.0

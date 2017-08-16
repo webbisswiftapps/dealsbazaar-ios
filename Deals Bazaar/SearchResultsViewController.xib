@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="QM.ttf">
+            <string>Quicksand-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchResultsViewController" customModule="Deals_Bazaar" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="DcZ-ps-foS" id="0Ad-rg-n0C"/>
+                <outlet property="searchBar" destination="53x-DO-DRQ" id="Hrz-Pt-Cdc"/>
+                <outlet property="view" destination="iN0-l3-epB" id="fs4-nF-iFf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxk-n3-Byi">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="uq8-7w-N4b">
+                            <rect key="frame" x="0.0" y="20" width="375" height="39"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5c-Ol-yKb">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="39"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="6cg-rJ-cB6"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_back"/>
+                                    <connections>
+                                        <action selector="onBackClicked:" destination="-1" eventType="touchUpInside" id="Pan-lQ-2bH"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for Products &amp; Brands" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="53x-DO-DRQ">
+                                    <rect key="frame" x="40" y="0.0" width="295" height="39"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Quicksand-Medium" family="Quicksand" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NN6-Vv-Rsh">
+                                    <rect key="frame" x="335" y="0.0" width="40" height="39"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="aT5-il-4zH"/>
+                                    </constraints>
+                                    <state key="normal" image="search_white"/>
+                                    <connections>
+                                        <action selector="onSearchClicked:" destination="-1" eventType="touchUpInside" id="hOW-A1-ySd"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.20727380870000001" blue="0.14245286779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="uq8-7w-N4b" secondAttribute="bottom" constant="5" id="9kI-2y-4kh"/>
+                        <constraint firstItem="uq8-7w-N4b" firstAttribute="leading" secondItem="Hxk-n3-Byi" secondAttribute="leading" id="Orl-bC-1kT"/>
+                        <constraint firstItem="uq8-7w-N4b" firstAttribute="top" secondItem="Hxk-n3-Byi" secondAttribute="top" constant="20" id="p8t-ce-LuW"/>
+                        <constraint firstAttribute="height" constant="64" id="rBv-FH-HSW"/>
+                        <constraint firstAttribute="trailing" secondItem="uq8-7w-N4b" secondAttribute="trailing" id="xXD-Wy-9ml"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ps-foS">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nrJ-ko-3Ma">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Hxk-n3-Byi" secondAttribute="trailing" id="2Hz-Ib-JcY"/>
+                <constraint firstAttribute="trailing" secondItem="DcZ-ps-foS" secondAttribute="trailing" id="HTe-yU-y5o"/>
+                <constraint firstAttribute="bottom" secondItem="DcZ-ps-foS" secondAttribute="bottom" id="MNx-Tq-B4s"/>
+                <constraint firstItem="DcZ-ps-foS" firstAttribute="top" secondItem="Hxk-n3-Byi" secondAttribute="bottom" id="fZ3-0v-A0s"/>
+                <constraint firstItem="Hxk-n3-Byi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rHV-A9-ebN"/>
+                <constraint firstItem="Hxk-n3-Byi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wkl-4j-pEb"/>
+                <constraint firstItem="DcZ-ps-foS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xMv-2b-pvm"/>
+            </constraints>
+            <point key="canvasLocation" x="23.5" y="51.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_back" width="24" height="24"/>
+        <image name="search_white" width="25" height="25"/>
+    </resources>
+</document>

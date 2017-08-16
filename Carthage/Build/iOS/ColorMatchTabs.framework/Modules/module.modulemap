@@ -1,0 +1,10 @@
+framework module ColorMatchTabs {
+  umbrella header "ColorMatchTabs.h"
+
+  export *
+  module * { export * }
+}
+
+module ColorMatchTabs.Swift {
+    header "ColorMatchTabs-Swift.h"
+}
